@@ -37,7 +37,8 @@ def run_scraper():
             METADATA_URL,
             params=params,
             headers=headers,
-            timeout=30
+            timeout=30,
+            verify=False
         )
 
         print("Metadata Status:", response.status_code)
@@ -72,7 +73,8 @@ def run_scraper():
                 "docCategory": "Circulars",
             },
             headers=headers,
-            timeout=30
+            timeout=30,
+            verify=False
         )
 
         print("Status:", response.status_code)
