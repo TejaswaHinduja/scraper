@@ -1,10 +1,15 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
 
 load_dotenv()
 
 client = genai.Client()
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = PROJECT_ROOT / "frontend" / "public"
+OUTPUT_FILE = OUTPUT_DIR / "output.md"
+STRUCTURED_FILE = OUTPUT_DIR / "structured_circular.md"
 
 def datafromOutput(file_path):
     try:
@@ -15,7 +20,7 @@ def datafromOutput(file_path):
         return "Error file not found"
 
 def run_gemini_structuring():
-    dataToSendToLLM = datafromOutput("output.md")
+    dataToSendToLLM = datafromOutput(OUTPUT_FILE)
 
     structured_input = [
         {
@@ -29,12 +34,13 @@ def run_gemini_structuring():
     ]
 
     interaction = client.interactions.create(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         input=structured_input
     )
 
-    output_filename = f"{filepath}+structured_circular.md"
-    with open(output_filename, "w", encoding="utf-8") as file:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    with open(STRUCTURED_FILE, "w", encoding="utf-8") as file:
         file.write(interaction.output_text)
 
-    print(f"Success! Response saved using Interactions API to {output_filename}")
+    print(f"Success! Response saved using Interactions API to {STRUCTURED_FILE}")

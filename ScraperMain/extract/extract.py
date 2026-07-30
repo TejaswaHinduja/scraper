@@ -1,6 +1,13 @@
 import os
 import glob
+from pathlib import Path
+
 import pymupdf4llm
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = PROJECT_ROOT / "frontend" / "public"
+OUTPUT_FILE = OUTPUT_DIR / "output.md"
 
 def run_extraction():
     pdf_files = glob.glob("downloads/*.pdf")
@@ -15,7 +22,9 @@ def run_extraction():
 
     markdown = pymupdf4llm.to_markdown(newest_pdf)
 
-    with open("output.md", "w", encoding="utf-8") as f:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(markdown)
         
-    print("Extraction successful! Saved to output.md")
+    print(f"Extraction successful! Saved to {OUTPUT_FILE}")
