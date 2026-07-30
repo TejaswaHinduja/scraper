@@ -33,7 +33,7 @@ def run_gemini_structuring():
         input=structured_input
     )
 
-    output_filename = "structured_circular.md"
+    output_filename = f"{filepath}+structured_circular.md"
     with open(output_filename, "w", encoding="utf-8") as file:
         file.write(interaction.output_text)
 

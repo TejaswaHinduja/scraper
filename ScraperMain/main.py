@@ -1,6 +1,6 @@
-from extract.extract import run_extraction
-from scrape import mca
-from services.gemini import run_gemini_structuring
+from ScraperMain.extract.extract import run_extraction
+from ScraperMain.scrape import mca
+from ScraperMain.services.gemini import run_gemini_structuring
 
 def main():
     print("\n--- Running  Web Scraper ---")
