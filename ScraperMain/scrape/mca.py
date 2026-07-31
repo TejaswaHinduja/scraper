@@ -1,11 +1,12 @@
-import os
 import requests
 import base64
 from datetime import datetime
+from pathlib import Path
 
 BASE_URL = "https://mca.gov.in"
 METADATA_URL = BASE_URL + "/bin/ebook/service/documentMetadata"
 PDF_URL = BASE_URL + "/bin/ebook/dms/getdocument"
+DOWNLOAD_DIR = Path(__file__).resolve().parents[1] / "downloads"
 
 def run_scraper():
     session = requests.Session()
@@ -50,8 +51,7 @@ def run_scraper():
 
     print(f"Found {len(docs['data'])} total circulars")
 
-    DOWNLOAD_DIR = "downloads"
-    os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+    DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
     START_DATE = datetime(2026, 1, 1)
 
@@ -95,7 +95,7 @@ def run_scraper():
         for ch in '\\/:*?"<>|':
             filename = filename.replace(ch, "_")
 
-        filepath = os.path.join(DOWNLOAD_DIR, filename)
+        filepath = DOWNLOAD_DIR / filename
 
         with open(filepath, "wb") as f:
             f.write(response.content)

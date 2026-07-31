@@ -1,3 +1,5 @@
 /downloads
+/raw_circulars
+/circulars
 .env
 __pycache__/
