@@ -139,7 +139,7 @@ export default function CircularViewer() {
         </header>
 
         <main className="flex-1 overflow-y-auto p-5 md:p-10">
-          <article className="mx-auto min-h-[1100px] max-w-4xl rounded-xl border border-zinc-200 bg-white px-7 py-10 shadow-sm md:px-14 md:py-16">
+          <article className="mx-auto min-h-275 max-w-4xl rounded-xl border border-zinc-200 bg-white px-7 py-10 shadow-sm md:px-14 md:py-16">
             <ReactMarkdown
               components={{
                 h1: ({ children }) => {
