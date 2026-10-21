@@ -24,7 +24,7 @@ export async function fetchCirculars(): Promise<CircularSummary[]> {
 export async function fetchCircular(id: string): Promise<CircularDetail> {
   const response = await fetch(
     `${API_BASE_URL}/circulars/${encodeURIComponent(id)}`,
-    { cache: "no-store" }
+    
   );
 
   if (!response.ok) {
